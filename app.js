@@ -18,6 +18,8 @@ const app = initializeApp(firebaseConfig);
 // Get a reference to the database service
 const database = getDatabase();
 
+document.getElementById("btEnter").addEventListener("click", send, false);
+
 function send(){
     var id = document.getElementById("id").value;
     // Example: Read data from Firebase
