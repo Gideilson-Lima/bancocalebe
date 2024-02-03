@@ -18,7 +18,7 @@ const app = initializeApp(firebaseConfig);
 // Get a reference to the database service
 const database = getDatabase();
 
-document.getElementById("btEnter").addEventListener("click", send, false);
+document.getElementById("bt").addEventListener("click", send, false);
 
 function send(){
     var id = document.getElementById("id").value;
