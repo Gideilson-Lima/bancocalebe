@@ -31,7 +31,7 @@ function getInfo(){
     get(usersRef).then((snapshot) => {
         const user = snapshot.val();
         var panel = document.getElementById("mpanel");
-        panel.textContent = `<ul><li>Conta: ${user.id}</li><li>Cliente: blank</li><li>Saldo: C$ ${user.balance}</li></ul>`;
+        panel.innerHTML = `<ul><li>Conta: ${user.id}</li><li>Cliente: blank</li><li>Saldo: C$ ${user.balance}</li></ul>`;
     });
 }
 
