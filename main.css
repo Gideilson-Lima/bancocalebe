@@ -23,7 +23,7 @@ li {
     text-align: center;
 }
 
-button{
+.mbutton{
     background-color: white;
     border: 3px solid #23bb15;
     color: black;
@@ -34,7 +34,7 @@ button{
     font-size: 110%;
 }
 
-button:hover{
+.mbutton:hover{
     background-color: #23bb15;
     border: 3px solid #23bb15;
     color: #225522;
