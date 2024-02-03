@@ -18,7 +18,7 @@ const app = initializeApp(firebaseConfig);
 // Get a reference to the database service
 const databaseRef = database();
 
-function send(){
+window.send = function(){
     var id = document.getElementById("id").value;
     // Example: Read data from Firebase
     const usersRef = databaseRef.ref('nSiao/'+id);
