@@ -22,8 +22,7 @@ document.getElementById("bt").addEventListener("click", send, false);
 
 function send(){  
   var id = document.getElementById("id").value;
-  window.location.href = "user.html?param1="+user.id;
-  
+  window.location.href = "user.html?param1="+id; 
 }
 
 function getInfo(){
