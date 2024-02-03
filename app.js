@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { database } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -16,15 +16,15 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 // Get a reference to the database service
-const databaseRef = database();
+const database = getDatabase();
 
-window.send = function(){
+function send(){
     var id = document.getElementById("id").value;
     // Example: Read data from Firebase
-    const usersRef = databaseRef.ref('nSiao/'+id);
-    usersRef.once('value', (snapshot) => {
+    const usersRef = ref(database, 'nSiao/'+id);
+    get(usersRef).then((snapshot) => {
         const user = snapshot.val();
         document.getElementById("panel").innerHTML = user;
         console.log(user.nome);
     });
-}
+  }
