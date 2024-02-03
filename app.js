@@ -20,13 +20,21 @@ const database = getDatabase();
 
 document.getElementById("bt").addEventListener("click", send, false);
 
-function send(){
-    var id = document.getElementById("id").value;
+function send(){  
+  var id = document.getElementById("id").value;
+  window.location.href = "user.html?param1="+user.id;
+  
+}
+
+function getInfo(){
+    const params = new URLSearchParams(window.location.search);
+    var id = params.get("param1");
+
     // Example: Read data from Firebase
     const usersRef = ref(database, 'nSiao/'+id);
     get(usersRef).then((snapshot) => {
         const user = snapshot.val();
-        document.getElementById("mpanel").textContent = user;
-        console.log(user.nome);
+        var panel = document.getElementById("mpanel");
+        panel.textContent = `<ul><li>Conta: ${user.id}</li><li>Cliente: blank</li><li>Saldo: C$ ${user.balance}</li></ul>`;
     });
-  }
+}
