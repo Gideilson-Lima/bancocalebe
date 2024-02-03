@@ -18,8 +18,6 @@ const app = initializeApp(firebaseConfig);
 // Get a reference to the database service
 const database = getDatabase();
 
-document.getElementById("bt").addEventListener("click", send, false);
-
 function send(){  
   var id = document.getElementById("id").value;
   window.location.href = "user.html?param1="+id; 
@@ -37,4 +35,9 @@ function getInfo(){
     });
 }
 
-getInfo();
+var bt = document.getElementById("bt");
+
+if(bt != null )
+  document.getElementById("bt").addEventListener("click", send, false);
+else
+  getInfo();
