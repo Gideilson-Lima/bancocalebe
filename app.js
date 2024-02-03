@@ -29,7 +29,6 @@ function send(){
 function getInfo(){
     const params = new URLSearchParams(window.location.search);
     var id = params.get("param1");
-
     // Example: Read data from Firebase
     const usersRef = ref(database, 'nSiao/'+id);
     get(usersRef).then((snapshot) => {
@@ -38,3 +37,5 @@ function getInfo(){
         panel.textContent = `<ul><li>Conta: ${user.id}</li><li>Cliente: blank</li><li>Saldo: C$ ${user.balance}</li></ul>`;
     });
 }
+
+getInfo();
