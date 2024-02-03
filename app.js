@@ -26,7 +26,7 @@ function send(){
     const usersRef = ref(database, 'nSiao/'+id);
     get(usersRef).then((snapshot) => {
         const user = snapshot.val();
-        document.getElementById("panel").innerHTML = user;
+        document.getElementById("mpanel").textContent = user;
         console.log(user.nome);
     });
   }
