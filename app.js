@@ -36,7 +36,7 @@ function getInfo(){
 }
 
 var bt = document.getElementById("bt");
-
+// if this button is null, it means we are not in "index.html", but in "user.html""
 if(bt != null )
   document.getElementById("bt").addEventListener("click", send, false);
 else
