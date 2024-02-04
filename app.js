@@ -31,12 +31,15 @@ function getInfo(){
     get(usersRef).then((snapshot) => {
         const user = snapshot.val();
         var panel = document.getElementById("mpanel");
-        panel.innerHTML = `<ul><li>Conta: ${user.id}</li><li>Cliente: blank</li><li>Saldo: C$ ${user.balance}</li></ul>`;
+        if(!Object.hasOwn(user,"name"))
+          panel.innerHTML = `<ul><li>Conta: ${user.id}</li><li>Cliente: [usuário não cadastrado]</li><li>Saldo: C$ ${user.balance}</li></ul>`;
+        else
+          panel.innerHTML = `<ul><li>Conta: ${user.id}</li><li>Cliente: ${user.name}</li><li>Saldo: C$ ${user.balance}</li></ul>`;
     });
 }
 
 var bt = document.getElementById("bt");
-// if this button is null, it means we are not in "index.html", but in "user.html""
+// if this button is null, it means we are not in "index.html", but in "user.html"
 if(bt != null )
   document.getElementById("bt").addEventListener("click", send, false);
 else
