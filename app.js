@@ -20,14 +20,16 @@ const database = getDatabase();
 
 function send(){  
   var id = document.getElementById("id").value;
-  window.location.href = "user.html?param1="+id; 
+  var idChurch = document.getElementById("idChurch").value;
+  window.location.href = "user.html?param1="+id+"&param2="+idChurch;
 }
 
 function getInfo(){
     const params = new URLSearchParams(window.location.search);
     var id = params.get("param1");
+    var idChurch = params.get("param2");
     // Example: Read data from Firebase
-    const usersRef = ref(database, 'nSiao/'+id);
+    const usersRef = ref(database, idChurch+'/'+id);
     get(usersRef).then((snapshot) => {
         const user = snapshot.val();
         var panel = document.getElementById("mpanel");
