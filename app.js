@@ -20,14 +20,16 @@ var logged = false;
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 // Get a reference to the database service
-const database = getDatabase();
+
+
+const database = app.getDatabase();
 
 const email = "web@lima.com";
 const password = "123456";
 
 
-const auth = getAuth();
-signInWithEmailAndPassword(email, password)
+const auth = app.getAuth();
+app.signInWithEmailAndPassword(email, password)
   .then((userCredential) => {
     // Signed in
     const user = userCredential.user;
