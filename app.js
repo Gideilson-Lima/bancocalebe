@@ -38,6 +38,8 @@ signInWithEmailAndPassword(auth,email, password)
     logged = true;
     if(bt==null){
       getInfo();
+      const params = new URLSearchParams(window.location.search);
+      var id = params.get("param1");
       const usersRef = ref(database, idChurch+'/'+id);
       usersRef.on('value', (snapshot) => {
         // This callback function will be triggered whenever the data at 'users' reference changes
