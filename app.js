@@ -37,6 +37,7 @@ firebase.auth().signInWithEmailAndPassword(email, password)
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
+    alert("Could not connect to database!");
     // ...
   });
 
