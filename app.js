@@ -25,7 +25,7 @@ const app = initializeApp(firebaseConfig);
 // Get a reference to the database service
 
 
-const database = app.getdabase();
+const database = app.database();
 
 const email = "web@lima.com";
 const password = "123456";
