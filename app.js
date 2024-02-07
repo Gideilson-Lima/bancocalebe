@@ -18,6 +18,29 @@ const app = initializeApp(firebaseConfig);
 // Get a reference to the database service
 const database = getDatabase();
 
+const email = "web@lima.com";
+const password = "123456";
+
+firebase.auth().signInWithEmailAndPassword(email, password)
+  .then((userCredential) => {
+    // Signed in
+    const user = userCredential.user;
+      
+    var bt = document.getElementById("bt");
+      // if this button is null, it means we are not in "index.html", but in "user.html"
+    if(bt != null )
+      document.getElementById("bt").addEventListener("click", send, false);
+    else
+      getInfo();
+      // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ...
+  });
+
+
 function send(){  
   var id = document.getElementById("id").value;
   var idChurch = document.getElementById("idChurch").value;
@@ -39,10 +62,3 @@ function getInfo(){
           panel.innerHTML = `<ul><li>Conta: ${user.id}</li><li>Cliente: ${user.name}</li><li>Saldo: C$ ${user.balance}</li></ul>`;
     });
 }
-
-var bt = document.getElementById("bt");
-// if this button is null, it means we are not in "index.html", but in "user.html"
-if(bt != null )
-  document.getElementById("bt").addEventListener("click", send, false);
-else
-  getInfo();
