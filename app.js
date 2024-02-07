@@ -36,7 +36,7 @@ signInWithEmailAndPassword(auth,email, password)
     const user = userCredential.user;
     console.log("successfully logged");
     logged = true;
-    if(bt!=null)
+    if(bt==null)
       getInfo();
       // ...
   })
