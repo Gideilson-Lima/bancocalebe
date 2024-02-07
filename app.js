@@ -59,10 +59,10 @@ function getInfo(){
       var idChurch = params.get("param2");
       // Example: Read data from Firebase
       const usersRef = ref(database, idChurch+'/'+id);
-      var panel = document.getElementById("mpanel");
           
       get(usersRef).then((snapshot) => {
           const user = snapshot.val();
+          var panel = document.getElementById("mpanel");
           if(!Object.hasOwn(user,"name"))
             panel.innerHTML = `<ul><li>Conta: ${user.id}</li><li>Cliente: [usuário não cadastrado]</li><li>Saldo: C$ ${user.balance}</li></ul>`;
           else
@@ -75,6 +75,7 @@ function getInfo(){
     
         // Retrieve the data from the snapshot
         const user = snapshot.val();
+        var panel = document.getElementById("mpanel");
         if(!Object.hasOwn(user,"name"))
           panel.innerHTML = `<ul><li>Conta: ${user.id}</li><li>Cliente: [usuário não cadastrado]</li><li>Saldo: C$ ${user.balance}</li></ul>`;
         else
