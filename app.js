@@ -42,7 +42,7 @@ signInWithEmailAndPassword(auth,email, password)
       var id = params.get("param1");
       var idChurch = params.get("param2");
       
-      const usersRef = ref(database, idChurch+'/'+id);
+      const usersRef = ref(database, idChurch);
       
       usersRef.on('value', (snapshot) => {
         // This callback function will be triggered whenever the data at 'users' reference changes
@@ -50,12 +50,15 @@ signInWithEmailAndPassword(auth,email, password)
     
         // Retrieve the data from the snapshot
         const user = snapshot.val();
+        
         var panel = document.getElementById("mpanel");
+        if(user.id === id){
         if(!Object.hasOwn(user,"name"))
           panel.innerHTML = `<ul><li>Conta: ${user.id}</li><li>Cliente: [usuário não cadastrado]</li><li>Saldo: C$ ${user.balance}</li></ul>`;
         else
           panel.innerHTML = `<ul><li>Conta: ${user.id}</li><li>Cliente: ${user.name}</li><li>Saldo: C$ ${user.balance}</li></ul>`;
         // Process the data or update your UI accordingly
+        }
         console.log("Data changed:", user);
     }, (error) => {
         // Handle any errors that occur while listening for changes
