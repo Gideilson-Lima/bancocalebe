@@ -31,7 +31,7 @@ const email = "web@lima.com";
 const password = "123456";
 
 const auth = getAuth();
-auth.signInWithEmailAndPassword(email, password)
+signInWithEmailAndPassword(email, password)
   .then((userCredential) => {
     // Signed in
     const user = userCredential.user;
