@@ -36,8 +36,27 @@ signInWithEmailAndPassword(auth,email, password)
     const user = userCredential.user;
     console.log("successfully logged");
     logged = true;
-    if(bt==null)
+    if(bt==null){
       getInfo();
+      const usersRef = ref(database, idChurch+'/'+id);
+      usersRef.on('value', (snapshot) => {
+        // This callback function will be triggered whenever the data at 'users' reference changes
+        // The 'snapshot' parameter contains the current data at the reference
+    
+        // Retrieve the data from the snapshot
+        const user = snapshot.val();
+        var panel = document.getElementById("mpanel");
+        if(!Object.hasOwn(user,"name"))
+          panel.innerHTML = `<ul><li>Conta: ${user.id}</li><li>Cliente: [usuário não cadastrado]</li><li>Saldo: C$ ${user.balance}</li></ul>`;
+        else
+          panel.innerHTML = `<ul><li>Conta: ${user.id}</li><li>Cliente: ${user.name}</li><li>Saldo: C$ ${user.balance}</li></ul>`;
+        // Process the data or update your UI accordingly
+        console.log("Data changed:", user);
+    }, (error) => {
+        // Handle any errors that occur while listening for changes
+        console.error("Error:", error);
+    });
+    }
       // ...
   })
   .catch((error) => {
@@ -68,24 +87,6 @@ function getInfo(){
           else
             panel.innerHTML = `<ul><li>Conta: ${user.id}</li><li>Cliente: ${user.name}</li><li>Saldo: C$ ${user.balance}</li></ul>`;
       });
-
-      usersRef.on('value', (snapshot) => {
-        // This callback function will be triggered whenever the data at 'users' reference changes
-        // The 'snapshot' parameter contains the current data at the reference
-    
-        // Retrieve the data from the snapshot
-        const user = snapshot.val();
-        var panel = document.getElementById("mpanel");
-        if(!Object.hasOwn(user,"name"))
-          panel.innerHTML = `<ul><li>Conta: ${user.id}</li><li>Cliente: [usuário não cadastrado]</li><li>Saldo: C$ ${user.balance}</li></ul>`;
-        else
-          panel.innerHTML = `<ul><li>Conta: ${user.id}</li><li>Cliente: ${user.name}</li><li>Saldo: C$ ${user.balance}</li></ul>`;
-        // Process the data or update your UI accordingly
-        console.log("Data changed:", user);
-    }, (error) => {
-        // Handle any errors that occur while listening for changes
-        console.error("Error:", error);
-    });
     
 }
 
