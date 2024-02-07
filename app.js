@@ -25,12 +25,12 @@ const app = initializeApp(firebaseConfig);
 // Get a reference to the database service
 
 
-const database = app.database();
+const database = getDatabase();
 
 const email = "web@lima.com";
 const password = "123456";
 
-const auth = app.auth();
+const auth = getAuth();
 auth.signInWithEmailAndPassword(email, password)
   .then((userCredential) => {
     // Signed in
