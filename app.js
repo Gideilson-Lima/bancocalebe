@@ -47,7 +47,6 @@ signInWithEmailAndPassword(auth,email, password)
     // ...
   });
 
-
 function send(){  
   var id = document.getElementById("id").value;
   var idChurch = document.getElementById("idChurch").value;
@@ -60,14 +59,33 @@ function getInfo(){
       var idChurch = params.get("param2");
       // Example: Read data from Firebase
       const usersRef = ref(database, idChurch+'/'+id);
+      var panel = document.getElementById("mpanel");
+          
       get(usersRef).then((snapshot) => {
           const user = snapshot.val();
-          var panel = document.getElementById("mpanel");
           if(!Object.hasOwn(user,"name"))
             panel.innerHTML = `<ul><li>Conta: ${user.id}</li><li>Cliente: [usuário não cadastrado]</li><li>Saldo: C$ ${user.balance}</li></ul>`;
           else
             panel.innerHTML = `<ul><li>Conta: ${user.id}</li><li>Cliente: ${user.name}</li><li>Saldo: C$ ${user.balance}</li></ul>`;
       });
+
+      usersRef.on('value', (snapshot) => {
+        // This callback function will be triggered whenever the data at 'users' reference changes
+        // The 'snapshot' parameter contains the current data at the reference
+    
+        // Retrieve the data from the snapshot
+        const user = snapshot.val();
+        if(!Object.hasOwn(user,"name"))
+          panel.innerHTML = `<ul><li>Conta: ${user.id}</li><li>Cliente: [usuário não cadastrado]</li><li>Saldo: C$ ${user.balance}</li></ul>`;
+        else
+          panel.innerHTML = `<ul><li>Conta: ${user.id}</li><li>Cliente: ${user.name}</li><li>Saldo: C$ ${user.balance}</li></ul>`;
+        // Process the data or update your UI accordingly
+        console.log("Data changed:", user);
+    }, (error) => {
+        // Handle any errors that occur while listening for changes
+        console.error("Error:", error);
+    });
+    
 }
 
 // if this button is null, it means we are not in "index.html", but in "user.html"
