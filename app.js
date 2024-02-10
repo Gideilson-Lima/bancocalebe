@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+import { getDatabase, ref, get, goOffline } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 // Your web app's Firebase configuration
@@ -15,10 +15,8 @@ const firebaseConfig = {
   appId: "1:830217582096:web:96d9bcfb7c6a7e99a7bc95"
 };
 
-var bt = document.getElementById("bt");
 var logged = false;
 // Initialize Firebase
-
 
 
 const app = initializeApp(firebaseConfig);
@@ -36,36 +34,8 @@ signInWithEmailAndPassword(auth,email, password)
     const user = userCredential.user;
     console.log("successfully logged");
     logged = true;
-    if(bt==null){
       getInfo();
-      const params = new URLSearchParams(window.location.search);
-      var id = params.get("param1");
-      var idChurch = params.get("param2");
-      
-      const usersRef = ref(database, idChurch);
-      
-      usersRef.on('value', (snapshot) => {
-        // This callback function will be triggered whenever the data at 'users' reference changes
-        // The 'snapshot' parameter contains the current data at the reference
-    
-        // Retrieve the data from the snapshot
-        const user = snapshot.val();
-        
-        var panel = document.getElementById("mpanel");
-        if(user.id === id){
-        if(!Object.hasOwn(user,"name"))
-          panel.innerHTML = `<ul><li>Conta: ${user.id}</li><li>Cliente: [usuário não cadastrado]</li><li>Saldo: C$ ${user.balance}</li></ul>`;
-        else
-          panel.innerHTML = `<ul><li>Conta: ${user.id}</li><li>Cliente: ${user.name}</li><li>Saldo: C$ ${user.balance}</li></ul>`;
-        // Process the data or update your UI accordingly
-        }
-        console.log("Data changed:", user);
-    }, (error) => {
-        // Handle any errors that occur while listening for changes
-        console.error("Error:", error);
-    });
-    }
-      // ...
+      goOffline(database);
   })
   .catch((error) => {
     const errorCode = error.code;
@@ -73,12 +43,6 @@ signInWithEmailAndPassword(auth,email, password)
   
     // ...
   });
-
-function send(){  
-  var id = document.getElementById("id").value;
-  var idChurch = document.getElementById("idChurch").value;
-  window.location.href = "user.html?param1="+id+"&param2="+idChurch;
-}
 
 function getInfo(){
       const params = new URLSearchParams(window.location.search);
@@ -97,7 +61,3 @@ function getInfo(){
       });
     
 }
-
-// if this button is null, it means we are not in "index.html", but in "user.html"
-if(bt != null )
-  document.getElementById("bt").addEventListener("click", send, false);
