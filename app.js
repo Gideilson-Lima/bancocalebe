@@ -35,7 +35,6 @@ signInWithEmailAndPassword(auth,email, password)
     console.log("successfully logged");
     logged = true;
       getInfo();
-      goOffline(database);
   })
   .catch((error) => {
     const errorCode = error.code;
@@ -58,6 +57,8 @@ function getInfo(){
             panel.innerHTML = `<ul><li>Conta: ${user.id}</li><li>Cliente: [usuário não cadastrado]</li><li>Saldo: C$ ${user.balance}</li></ul>`;
           else
             panel.innerHTML = `<ul><li>Conta: ${user.id}</li><li>Cliente: ${user.name}</li><li>Saldo: C$ ${user.balance}</li></ul>`;
+          
+          goOffline(database);
       });
     
 }
